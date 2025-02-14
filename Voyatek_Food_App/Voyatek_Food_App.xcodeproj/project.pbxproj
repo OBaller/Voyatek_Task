@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		C57751F02D5F4CF700FDE1BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C57751D12D5F4CF500FDE1BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C57751D82D5F4CF500FDE1BA;
+			remoteInfo = Voyatek_Food_App;
+		};
+		C57751FA2D5F4CF700FDE1BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C57751D12D5F4CF500FDE1BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C57751D82D5F4CF500FDE1BA;
+			remoteInfo = Voyatek_Food_App;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C57751D92D5F4CF500FDE1BA /* Voyatek_Food_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voyatek_Food_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C57751EF2D5F4CF700FDE1BA /* Voyatek_Food_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Voyatek_Food_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C57751F92D5F4CF700FDE1BA /* Voyatek_Food_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Voyatek_Food_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C57752012D5F4CF700FDE1BA /* Exceptions for "Voyatek_Food_App" folder in "Voyatek_Food_App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C57751D82D5F4CF500FDE1BA /* Voyatek_Food_App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C57751DB2D5F4CF500FDE1BA /* Voyatek_Food_App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C57752012D5F4CF700FDE1BA /* Exceptions for "Voyatek_Food_App" folder in "Voyatek_Food_App" target */,
+			);
+			path = Voyatek_Food_App;
+			sourceTree = "<group>";
+		};
+		C57751F22D5F4CF700FDE1BA /* Voyatek_Food_AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Voyatek_Food_AppTests;
+			sourceTree = "<group>";
+		};
+		C57751FC2D5F4CF700FDE1BA /* Voyatek_Food_AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Voyatek_Food_AppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C57751D62D5F4CF500FDE1BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C57751EC2D5F4CF700FDE1BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C57751F62D5F4CF700FDE1BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C57751D02D5F4CF500FDE1BA = {
+			isa = PBXGroup;
+			children = (
+				C57751DB2D5F4CF500FDE1BA /* Voyatek_Food_App */,
+				C57751F22D5F4CF700FDE1BA /* Voyatek_Food_AppTests */,
+				C57751FC2D5F4CF700FDE1BA /* Voyatek_Food_AppUITests */,
+				C57751DA2D5F4CF500FDE1BA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C57751DA2D5F4CF500FDE1BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C57751D92D5F4CF500FDE1BA /* Voyatek_Food_App.app */,
+				C57751EF2D5F4CF700FDE1BA /* Voyatek_Food_AppTests.xctest */,
+				C57751F92D5F4CF700FDE1BA /* Voyatek_Food_AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C57751D82D5F4CF500FDE1BA /* Voyatek_Food_App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C57752022D5F4CF700FDE1BA /* Build configuration list for PBXNativeTarget "Voyatek_Food_App" */;
+			buildPhases = (
+				C57751D52D5F4CF500FDE1BA /* Sources */,
+				C57751D62D5F4CF500FDE1BA /* Frameworks */,
+				C57751D72D5F4CF500FDE1BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C57751DB2D5F4CF500FDE1BA /* Voyatek_Food_App */,
+			);
+			name = Voyatek_Food_App;
+			packageProductDependencies = (
+			);
+			productName = Voyatek_Food_App;
+			productReference = C57751D92D5F4CF500FDE1BA /* Voyatek_Food_App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C57751EE2D5F4CF700FDE1BA /* Voyatek_Food_AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C57752072D5F4CF700FDE1BA /* Build configuration list for PBXNativeTarget "Voyatek_Food_AppTests" */;
+			buildPhases = (
+				C57751EB2D5F4CF700FDE1BA /* Sources */,
+				C57751EC2D5F4CF700FDE1BA /* Frameworks */,
+				C57751ED2D5F4CF700FDE1BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C57751F12D5F4CF700FDE1BA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C57751F22D5F4CF700FDE1BA /* Voyatek_Food_AppTests */,
+			);
+			name = Voyatek_Food_AppTests;
+			packageProductDependencies = (
+			);
+			productName = Voyatek_Food_AppTests;
+			productReference = C57751EF2D5F4CF700FDE1BA /* Voyatek_Food_AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C57751F82D5F4CF700FDE1BA /* Voyatek_Food_AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C577520A2D5F4CF700FDE1BA /* Build configuration list for PBXNativeTarget "Voyatek_Food_AppUITests" */;
+			buildPhases = (
+				C57751F52D5F4CF700FDE1BA /* Sources */,
+				C57751F62D5F4CF700FDE1BA /* Frameworks */,
+				C57751F72D5F4CF700FDE1BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C57751FB2D5F4CF700FDE1BA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C57751FC2D5F4CF700FDE1BA /* Voyatek_Food_AppUITests */,
+			);
+			name = Voyatek_Food_AppUITests;
+			packageProductDependencies = (
+			);
+			productName = Voyatek_Food_AppUITests;
+			productReference = C57751F92D5F4CF700FDE1BA /* Voyatek_Food_AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C57751D12D5F4CF500FDE1BA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					C57751D82D5F4CF500FDE1BA = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					C57751EE2D5F4CF700FDE1BA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = C57751D82D5F4CF500FDE1BA;
+					};
+					C57751F82D5F4CF700FDE1BA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = C57751D82D5F4CF500FDE1BA;
+					};
+				};
+			};
+			buildConfigurationList = C57751D42D5F4CF500FDE1BA /* Build configuration list for PBXProject "Voyatek_Food_App" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C57751D02D5F4CF500FDE1BA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C57751DA2D5F4CF500FDE1BA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C57751D82D5F4CF500FDE1BA /* Voyatek_Food_App */,
+				C57751EE2D5F4CF700FDE1BA /* Voyatek_Food_AppTests */,
+				C57751F82D5F4CF700FDE1BA /* Voyatek_Food_AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C57751D72D5F4CF500FDE1BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C57751ED2D5F4CF700FDE1BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C57751F72D5F4CF700FDE1BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C57751D52D5F4CF500FDE1BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C57751EB2D5F4CF700FDE1BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C57751F52D5F4CF700FDE1BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C57751F12D5F4CF700FDE1BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C57751D82D5F4CF500FDE1BA /* Voyatek_Food_App */;
+			targetProxy = C57751F02D5F4CF700FDE1BA /* PBXContainerItemProxy */;
+		};
+		C57751FB2D5F4CF700FDE1BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C57751D82D5F4CF500FDE1BA /* Voyatek_Food_App */;
+			targetProxy = C57751FA2D5F4CF700FDE1BA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C57752032D5F4CF700FDE1BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZPS3H473KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Voyatek_Food_App/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "brightSummit.com.Voyatek-Food-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C57752042D5F4CF700FDE1BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZPS3H473KB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Voyatek_Food_App/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "brightSummit.com.Voyatek-Food-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C57752052D5F4CF700FDE1BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C57752062D5F4CF700FDE1BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C57752082D5F4CF700FDE1BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PHU9V25XH6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "brightSummit.com.Voyatek-Food-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Voyatek_Food_App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Voyatek_Food_App";
+			};
+			name = Debug;
+		};
+		C57752092D5F4CF700FDE1BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PHU9V25XH6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "brightSummit.com.Voyatek-Food-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Voyatek_Food_App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Voyatek_Food_App";
+			};
+			name = Release;
+		};
+		C577520B2D5F4CF700FDE1BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PHU9V25XH6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "brightSummit.com.Voyatek-Food-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Voyatek_Food_App;
+			};
+			name = Debug;
+		};
+		C577520C2D5F4CF700FDE1BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PHU9V25XH6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "brightSummit.com.Voyatek-Food-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Voyatek_Food_App;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C57751D42D5F4CF500FDE1BA /* Build configuration list for PBXProject "Voyatek_Food_App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C57752052D5F4CF700FDE1BA /* Debug */,
+				C57752062D5F4CF700FDE1BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C57752022D5F4CF700FDE1BA /* Build configuration list for PBXNativeTarget "Voyatek_Food_App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C57752032D5F4CF700FDE1BA /* Debug */,
+				C57752042D5F4CF700FDE1BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C57752072D5F4CF700FDE1BA /* Build configuration list for PBXNativeTarget "Voyatek_Food_AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C57752082D5F4CF700FDE1BA /* Debug */,
+				C57752092D5F4CF700FDE1BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C577520A2D5F4CF700FDE1BA /* Build configuration list for PBXNativeTarget "Voyatek_Food_AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C577520B2D5F4CF700FDE1BA /* Debug */,
+				C577520C2D5F4CF700FDE1BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C57751D12D5F4CF500FDE1BA /* Project object */;
+}
