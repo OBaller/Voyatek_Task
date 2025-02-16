@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FoodImageCell: UICollectionViewCell {
     private let imageView: UIImageView = {
@@ -27,6 +28,7 @@ class FoodImageCell: UICollectionViewCell {
     
     private func setupUI() {
         contentView.addSubview(imageView)
+      imageView.setHeight(height: 284)
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -35,7 +37,7 @@ class FoodImageCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with imageName: String) {
-        imageView.image = UIImage(named: imageName)
-    }
+  func configure(with url: String) {
+          imageView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "placeholder"))
+      }
 }

@@ -10,7 +10,7 @@ import UIKit
 import UIKit
 
 class FoodDetailViewController: UIViewController {
-  private let food: Food
+  private let food: FoodItem
   
   // MARK: - UI Components
   private let scrollView: UIScrollView = {
@@ -153,7 +153,7 @@ class FoodDetailViewController: UIViewController {
   }()
   
   // MARK: - Initialization
-  init(food: Food) {
+  init(food: FoodItem) {
     self.food = food
     super.init(nibName: nil, bundle: nil)
   }
@@ -234,7 +234,7 @@ class FoodDetailViewController: UIViewController {
       contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
     
-      removeButton.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 100),
+      removeButton.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 60),
       removeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
       removeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
       removeButton.heightAnchor.constraint(equalToConstant: 50),
@@ -253,7 +253,7 @@ class FoodDetailViewController: UIViewController {
     imagesCollectionView.register(FoodImageCell.self, forCellWithReuseIdentifier: "FoodImageCell")
     imagesCollectionView.delegate = self
     imagesCollectionView.dataSource = self
-    imagePageControl.numberOfPages = food.imageURLs.count
+    imagePageControl.numberOfPages = food.foodImages.count
   }
   
   private func configureWithFood() {
@@ -262,7 +262,7 @@ class FoodDetailViewController: UIViewController {
     caloriesLabel.text = "\(food.calories) Calories"
     
     // Setup tags
-    food.tags.forEach { tag in
+    food.foodTags.forEach { tag in
       let tagView = TagView(title: tag)
       tagsStackView.addArrangedSubview(tagView)
     }
@@ -270,7 +270,8 @@ class FoodDetailViewController: UIViewController {
   
   // MARK: - Actions
   @objc private func editTapped() {
-    
+    let detailVC = AddViewController()
+    navigationController?.pushViewController(detailVC, animated: true)
   }
   
   @objc private func favoriteTapped() {
@@ -281,12 +282,12 @@ class FoodDetailViewController: UIViewController {
 // MARK: - UICollectionView
 extension FoodDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return food.imageURLs.count
+    return food.foodImages.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodImageCell", for: indexPath) as! FoodImageCell
-    cell.configure(with: food.imageURLs[indexPath.row])
+    cell.configure(with: food.foodImages[indexPath.row].imageURL)
     return cell
   }
   

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FoodTableViewCell: UITableViewCell {
   // MARK: - Properties
@@ -165,23 +166,22 @@ class FoodTableViewCell: UITableViewCell {
   }
   
   // MARK: - Configure Cell
-  func configure(with food: Food) {
+  func configure(with food: FoodItem) {
     titleLabel.text = food.name
     caloriesLabel.text = "\(food.calories) Calories"
     descriptionLabel.text = food.description
     
     // Load first image or set to nil if none available
-    if let firstImageName = food.imageURLs.first {
-      mainImageView.image = UIImage(named: firstImageName)
-    } else {
-      mainImageView.image = nil
-    }
+    if let imageUrlString = food.foodImages.first?.imageURL, let url = URL(string: imageUrlString) {
+      mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            } else {
+              mainImageView.image = UIImage(named: "placeholder")
+            }
     
-    // Clear old tags before adding new ones (to handle cell reuse)
     tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     
-    for tag in food.tags {
-      let tagView = TagView(title: tag) // Assuming you have a TagView component
+    for tag in food.foodTags {
+      let tagView = TagView(title: tag)
       tagsStackView.addArrangedSubview(tagView)
     }
   }

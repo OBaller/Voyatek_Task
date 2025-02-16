@@ -115,3 +115,9 @@ public extension UIView {
     endEditing(true)
   }
 }
+
+class CategoryScrollView: UIScrollView {
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        return true
+    }
+}

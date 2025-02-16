@@ -14,13 +14,34 @@ class HomeViewController: UIViewController {
     let searchBar = UISearchBar()
     searchBar.placeholder = "Search foods..."
     searchBar.translatesAutoresizingMaskIntoConstraints = false
+    searchBar.searchBarStyle = .minimal
+    searchBar.backgroundColor = UIColor.clear
+    
+    if let textField = searchBar.value(forKey: "searchField") as? UITextField {
+      textField.backgroundColor = UIColor(red: 247/255, green: 249/255, blue: 252/255, alpha: 1)
+      textField.layer.cornerRadius = 4
+      textField.clipsToBounds = true
+      textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+      
+      textField.attributedPlaceholder = NSAttributedString(
+        string: "Search foods...",
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+      )
+      if let leftView = textField.leftView as? UIImageView {
+        leftView.image = UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysTemplate)
+        leftView.tintColor = UIColor.lightGray
+      }
+    }
     return searchBar
   }()
   
-  private let categoryScrollView: UIScrollView = {
-    let scrollView = UIScrollView()
+  
+  private let categoryScrollView: CategoryScrollView = {
+    let scrollView = CategoryScrollView()
     scrollView.showsHorizontalScrollIndicator = false
     scrollView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.delaysContentTouches = false
+    scrollView.canCancelContentTouches = true
     return scrollView
   }()
   
@@ -57,7 +78,14 @@ class HomeViewController: UIViewController {
   }()
   
   
-  public var foods: [Food] = DummyData.foods
+  private let foodViewModel = FoodViewModel()
+  private var foods: [FoodItem] = []
+  private var categories: [Category] = []
+  private var allFoods: [FoodItem] = []
+  private var filteredFoods: [FoodItem] = []
+  private var searchText: String = ""
+  
+  
   
   // MARK: - Lifecycle
   override func viewDidLoad() {
@@ -71,17 +99,20 @@ class HomeViewController: UIViewController {
     let user = UIBarButtonItem(image: userImage, style: .plain, target: self, action: #selector(profileTapped))
     navigationItem.leftBarButtonItem = user
     
-    
     setupUI()
     setupConstraints()
-    
-    
+    setupViewModel()
+    foodViewModel.fetchFood()
+    foodViewModel.fetchCategories()
+    categoryScrollView.delegate = self
+    categoryStackView.isUserInteractionEnabled = true
+    categoryScrollView.isUserInteractionEnabled = true
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.navigationBar.prefersLargeTitles = false
-    navigationController?.navigationBar.tintColor = .label // Ensures visibility in dark/light mode
+    navigationController?.navigationBar.tintColor = .label
   }
   
   
@@ -102,15 +133,29 @@ class HomeViewController: UIViewController {
   }
   
   private func setupCategories() {
-    let categories = ["All", "Morning Feast", "Sunrise Meal", "Dawn Delicacies"]
+    let allButton = CategoryButton(title: "All")
+    allButton.addTarget(self, action: #selector(categoryTapped(_:)), for: .touchUpInside)
+    categoryStackView.addArrangedSubview(allButton)
+    allButton.isSelected = true
     
-    for (index, category) in categories.enumerated() {
-      let button = CategoryButton(title: category)
-      button.addTarget(self, action: #selector(categoryTapped(_:)), for: .touchUpInside)
-      categoryStackView.addArrangedSubview(button)
-      
-      if index == 0 {
-        button.isSelected = true
+    foodViewModel.onCategoriesUpdated = { [weak self] in
+      DispatchQueue.main.async {
+        guard let self = self else { return }
+        
+        self.categoryStackView.arrangedSubviews.forEach { view in
+          if let categoryButton = view as? CategoryButton, categoryButton.title(for: .normal) != "All" {
+            self.categoryStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+          }
+        }
+        
+        for category in self.foodViewModel.categories {
+          let button = CategoryButton(title: category.name)
+          button.addTarget(self, action: #selector(self.categoryTapped(_:)), for: .touchUpInside)
+          self.categoryStackView.addArrangedSubview(button)
+        }
+        
+        self.categoryScrollView.layoutIfNeeded()
       }
     }
   }
@@ -122,9 +167,9 @@ class HomeViewController: UIViewController {
     textStackView.spacing = 2
     textStackView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(textStackView)
-
+    
     titleLabel.text = "Hey there, Lucy!"
-        subtitleLabel.text = "Are you excited to create a tasty dish today?"
+    subtitleLabel.text = "Are you excited to create a tasty dish today?"
     
     NSLayoutConstraint.activate([
       textStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -137,7 +182,7 @@ class HomeViewController: UIViewController {
       categoryScrollView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
       categoryScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       categoryScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      categoryScrollView.heightAnchor.constraint(equalToConstant: 44),
+      categoryScrollView.heightAnchor.constraint(equalToConstant: 40),
       
       categoryStackView.topAnchor.constraint(equalTo: categoryScrollView.topAnchor),
       categoryStackView.leadingAnchor.constraint(equalTo: categoryScrollView.leadingAnchor, constant: 16),
@@ -151,16 +196,76 @@ class HomeViewController: UIViewController {
     ])
   }
   
+  private func setupViewModel() {
+    foodViewModel.onDataUpdated = { [weak self] in
+      self?.foods = self?.foodViewModel.foods ?? []
+      self?.allFoods = self?.foodViewModel.foods ?? []
+      self?.tableView.reloadData()
+    }
+    
+    foodViewModel.onError = { [weak self] errorMessage in
+      DispatchQueue.main.async {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self?.present(alert, animated: true)
+      }
+    }
+    
+    
+  }
+  
   // MARK: - Actions
   @objc private func profileTapped() {
     // Handle profile tap
   }
   
-  @objc private func categoryTapped(_ sender: CategoryButton) {
+  @objc private func categoryTapped(_ sender: Any) {
+    var selectedButton: CategoryButton?
+    
+    if let button = sender as? CategoryButton {
+      selectedButton = button
+    } else if let gesture = sender as? UITapGestureRecognizer, let button = gesture.view as? CategoryButton {
+      selectedButton = button
+    }
+    
+    guard let button = selectedButton else {
+      print("Invalid sender for categoryTapped")
+      return
+    }
+    
     for view in categoryStackView.arrangedSubviews {
-      if let button = view as? CategoryButton {
-        button.isSelected = (button == sender)
+      if let categoryButton = view as? CategoryButton {
+        categoryButton.isSelected = (categoryButton == button)
       }
+    }
+    
+    
+    if let selectedCategory = button.title(for: .normal) {
+      switch selectedCategory {
+        case "All":
+          foods = allFoods
+          tableView.reloadData()
+          print("All category selected")
+        default:
+          print("\(selectedCategory) category selected")
+          filterFoodsByCategory(selectedCategory)
+      }
+    }
+  }
+  
+  
+  private func filterFoodsByCategory(_ categoryName: String) {
+    let filteredFoods = foodViewModel.foods.filter { foodItem in
+      foodItem.category.name == categoryName
+    }
+    foods = filteredFoods
+    tableView.reloadData()
+    
+    if filteredFoods.isEmpty {
+      print("No food found for this category")
+      let alert = UIAlertController(title: "No Food Available", message: "No food items found for the selected category.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      self.present(alert, animated: true)
     }
   }
 }
@@ -188,13 +293,55 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     let food = foods[indexPath.row]
     let detailVC = FoodDetailViewController(food: food)
     detailVC.hidesBottomBarWhenPushed = true
-       navigationController?.pushViewController(detailVC, animated: true)
+    navigationController?.pushViewController(detailVC, animated: true)
   }
 }
 
 // MARK: - UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    // Handle search
+    self.searchText = searchText
+    
+    if searchText.count >= 3 || searchText.isEmpty {
+      performSearch()
+    }
+  }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    performSearch()
+  }
+  
+  private func performSearch() {
+    if searchText.isEmpty {
+      foods = allFoods
+    } else {
+      let lowercasedSearchText = searchText.lowercased()
+      
+      filteredFoods = allFoods.filter { foodItem in
+        let nameMatch = foodItem.name.lowercased().contains(lowercasedSearchText)
+        let categoryMatch = foodItem.category.name.lowercased().contains(lowercasedSearchText)
+        let tagsMatch = foodItem.foodTags.contains { tag in
+          tag.lowercased().contains(lowercasedSearchText)
+        }
+        return nameMatch || categoryMatch || tagsMatch
+      }
+      foods = filteredFoods
+    }
+    tableView.reloadData()
+  }
+  
+}
+
+extension HomeViewController: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+  }
+  
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    categoryStackView.arrangedSubviews.forEach { view in
+      if let button = view as? UIButton {
+        button.isHighlighted = false
+      }
+    }
   }
 }

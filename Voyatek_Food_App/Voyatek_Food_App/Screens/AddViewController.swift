@@ -85,12 +85,15 @@ class AddViewController: UIViewController {
   }()
   
   
-  private let categoryView: InputView = {
-    let view = InputView(labelText: "Category", placeholder: "Dawn Delicacies")
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.textField.isEnabled = false
-    return view
-  }()
+//  private let categoryView: InputView = {
+//    let view = InputView(labelText: "Category", placeholder: "Dawn Delicacies")
+//    view.translatesAutoresizingMaskIntoConstraints = false
+//    view.textField.isEnabled = false
+//    return view
+//  }()
+  
+  let categoryView = CategoryPickerView()
+
   
   private let caloriesView: InputView = {
     let view = InputView(labelText: "Calories", placeholder: "Enter number of calories")

@@ -11,7 +11,7 @@ class CategoryButton: UIButton {
   override var isSelected: Bool {
     didSet {
       backgroundColor = isSelected ? .systemBlue : .systemGray6
-      setTitleColor(isSelected ? .white : .black, for: .normal)
+      setTitleColor(isSelected ? .white : .lightGray, for: .normal)
     }
   }
   
@@ -21,12 +21,21 @@ class CategoryButton: UIButton {
     setTitleColor(.black, for: .normal)
     backgroundColor = .systemGray6
     layer.cornerRadius = 8
-    setHeight(height: 30)
+    setHeight(height: 25)
     contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+    
+    // Add these lines
+    isUserInteractionEnabled = true
+    clipsToBounds = true
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  // Override this method to allow scroll gestures
+  override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
   }
 }
 
@@ -50,15 +59,15 @@ class CustomImageButton: UIButton {
     
     setTitle(title, for: .normal)
     setTitleColor(.lightGray, for: .normal)
-    titleLabel?.font = .systemFont(ofSize: 16)
+    titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
     titleLabel?.textAlignment = .center
     
     layer.borderWidth = 1
     layer.borderColor = UIColor.systemGray5.cgColor
-    layer.cornerRadius = 8
+    layer.cornerRadius = 4
     
     DispatchQueue.main.async {
-      self.centerVertically(padding: 35)
+            self.centerVertically(padding: 30)
     }
   }
 }
