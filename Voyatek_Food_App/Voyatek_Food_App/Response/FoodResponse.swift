@@ -56,3 +56,9 @@ struct FoodCategory: Codable {
         case updatedAt = "updated_at"
     }
 }
+
+extension FoodCategory {
+    func toCategory() -> Category {
+      return Category(id: self.id, name: self.name, description: self.description, createdAt: self.createdAt, updatedAt: self.updatedAt)
+    }
+}

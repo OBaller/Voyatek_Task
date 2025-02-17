@@ -201,39 +201,39 @@ class FoodDetailViewController: UIViewController {
   
   private func setupConstraints() {
     imagesCollectionView.newAnchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor)
-        imagesCollectionView.setHeight(height: 300)
-
-        imagePageControl.centerX(inView: imagesCollectionView)
-        imagePageControl.newAnchor(bottom: imagesCollectionView.bottomAnchor, paddingBottom: 16)
-
+    imagesCollectionView.setHeight(height: 300)
+    
+    imagePageControl.centerX(inView: imagesCollectionView)
+    imagePageControl.newAnchor(bottom: imagesCollectionView.bottomAnchor, paddingBottom: 16)
+    
     titleLabel.newAnchor(top: imagesCollectionView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 16, paddingLeft: 16, paddingRight: 16)
-
+    
     tagsStackView.newAnchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 8, paddingLeft: 16)
-
+    
     descriptionLabel.newAnchor(top: tagsStackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 16, paddingLeft: 16, paddingRight: 16)
     
     caloriesView.newAnchor(top: descriptionLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 16, paddingRight: 16)
-        caloriesView.setHeight(height: 60)
+    caloriesView.setHeight(height: 60)
     nutritionStackView.newAnchor(top: caloriesView.topAnchor, left: caloriesView.leftAnchor, bottom: caloriesView.bottomAnchor, right: caloriesView.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
-
+    
     notesLabel.newAnchor(top: caloriesView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 16, paddingRight: 16)
-
+    
     addNotesButton.newAnchor(top: notesLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 4, paddingLeft: 16)
-
-
-
+    
+    
+    
     NSLayoutConstraint.activate([
       scrollView.topAnchor.constraint(equalTo: view.topAnchor),
       scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
+      
       contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
       contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
       contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
       contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-    
+      
       removeButton.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 60),
       removeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
       removeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -270,8 +270,10 @@ class FoodDetailViewController: UIViewController {
   
   // MARK: - Actions
   @objc private func editTapped() {
-    let detailVC = AddViewController()
-    navigationController?.pushViewController(detailVC, animated: true)
+    let addVC = AddViewController()
+    addVC.isForEditing = true
+    addVC.foodItem = self.food
+    navigationController?.pushViewController(addVC, animated: true)
   }
   
   @objc private func favoriteTapped() {

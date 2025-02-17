@@ -26,6 +26,14 @@ class AddViewController: UIViewController {
   
   
   private var tags: [String] = []
+  var isForEditing = false
+  var foodItem: FoodItem?
+  private let viewModel = AddFoodViewModel()
+  var categories: Category?
+  var validTags: [Tag] = []
+  private var tagsDictionary: [String: Int] = [:]
+  private var selectedTagIDs: [Int] = []
+  private var selectedTagNames: [String] = []
   
   // MARK: - UI Components
   private let scrollView: UIScrollView = {
@@ -84,16 +92,8 @@ class AddViewController: UIViewController {
     return view
   }()
   
-  
-//  private let categoryView: InputView = {
-//    let view = InputView(labelText: "Category", placeholder: "Dawn Delicacies")
-//    view.translatesAutoresizingMaskIntoConstraints = false
-//    view.textField.isEnabled = false
-//    return view
-//  }()
-  
   let categoryView = CategoryPickerView()
-
+  
   
   private let caloriesView: InputView = {
     let view = InputView(labelText: "Calories", placeholder: "Enter number of calories")
@@ -131,7 +131,7 @@ class AddViewController: UIViewController {
     button.titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
     button.setTitleColor(.lightGray, for: .normal)
     
-    button.isEnabled = false
+    //    button.isEnabled = false
     return button
   }()
   
@@ -142,8 +142,78 @@ class AddViewController: UIViewController {
     setupConstraints()
     setupActions()
     tagsView.textField.delegate = self
+    if isForEditing, let food = foodItem {
+      configureForEditing(with: food)
+    }
+    getCategories()
+    
+    setupBindings()
+    viewModel.fetchTags()
     
   }
+  
+  private func setupBindings() {
+    viewModel.onTagsUpdated = { [weak self] in
+      guard let self = self else { return }
+      self.tagsDictionary = self.viewModel.validTagsDictionary
+      print("Updated tags: \(self.tagsDictionary)") // Debugging
+    }
+    
+    viewModel.onError = { errorMessage in
+      print("Error fetching tags: \(errorMessage)")
+    }
+  }
+  
+  private func getCategories() {
+    categoryView.fetchCategories { [weak self] result in
+      switch result {
+        case .success(_):
+          if self?.isForEditing == true, let category = self?.categories {
+            self?.categoryView.category = category
+          }
+        case .failure(let error):
+          print("Error fetching categories: \(error)")
+      }
+    }
+  }
+  
+  private func configureForEditing(with food: FoodItem) {
+    nameField.textField.text = food.name
+    descriptionView.textView.text = food.description
+    categoryView.category = food.category.toCategory()
+    caloriesView.textField.text = String(food.calories)
+    
+    loadImagesFromURLs(food.foodImages.map { $0.imageURL })
+    
+    food.foodTags.forEach { addTag($0) }
+    addFoodButton.setTitle("Update Food", for: .normal)
+    addFoodButton.isEnabled = true
+    addFoodButton.setTitleColor(.white, for: .normal)
+    addFoodButton.backgroundColor = .systemBlue
+  }
+  
+  
+  private func loadImagesFromURLs(_ urls: [String]) {
+    for urlString in urls {
+      guard let url = URL(string: urlString) else {
+        print("Invalid URL: \(urlString)")
+        continue
+      }
+      
+      URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        guard let self = self, let data = data, let image = UIImage(data: data) else {
+          print("Failed to load image from \(urlString): \(error?.localizedDescription ?? "Unknown error")")
+          return
+        }
+        
+        DispatchQueue.main.async {
+          self.selectedImages.append(image)
+          self.imagesCollectionView.reloadData()
+        }
+      }.resume()
+    }
+  }
+  
   
   // MARK: - Setup
   private func setupUI() {
@@ -261,9 +331,9 @@ class AddViewController: UIViewController {
                             paddingLeft: padding)
     
     tagsInfo.newAnchor(top: tagsStackView.bottomAnchor,
-                            left: contentView.leftAnchor,
-                            paddingTop: 4,
-                            paddingLeft: padding)
+                       left: contentView.leftAnchor,
+                       paddingTop: 4,
+                       paddingLeft: padding)
     
     // Add Food Button
     addFoodButton.newAnchor(top: tagsStackView.bottomAnchor,
@@ -306,8 +376,91 @@ class AddViewController: UIViewController {
   }
   
   @objc private func addFoodTapped() {
-    // Implement your save logic here
-    print("Adding food...")
+    guard let name = nameField.textField.text, !name.isEmpty,
+          let description = descriptionView.textView.text, !description.isEmpty,
+          let categoryId = categoryView.category?.id,
+          let caloriesText = caloriesView.textField.text, let calories = Int(caloriesText) else {
+      let alert = UIAlertController(title: "Error", message: "Please fill in all fields", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      present(alert, animated: true, completion: nil)
+      return
+    }
+    
+    let foodId = foodItem?.id
+    
+    // *** Show Activity Indicator ***
+    let activityIndicator = UIActivityIndicatorView(style: .medium)
+    activityIndicator.center = self.view.center // Or wherever you want to center it
+    activityIndicator.startAnimating()
+    self.view.addSubview(activityIndicator) // Add it to the view
+    
+    if isEditing, let foodId = foodId {
+      viewModel.updateFood(
+        id: foodId,
+        name: name,
+        description: description,
+        categoryId: categoryId,
+        calories: calories,
+        tags: selectedTagIDs,
+        images: selectedImages
+      ) { [weak self] result in
+        DispatchQueue.main.async { // Update UI on main thread
+          activityIndicator.stopAnimating() // Stop and remove indicator
+          activityIndicator.removeFromSuperview()
+          guard let self = self else { return }
+          
+          switch result {
+            case .success(let response):
+              print("Food updated successfully: \(response)")
+              self.navigationController?.popViewController(animated: true) // If you still want to pop on update
+              
+            case .failure(let error):
+              let alert = UIAlertController(title: "Error", message: "Failed to update food: \(error.localizedDescription)", preferredStyle: .alert)
+              alert.addAction(UIAlertAction(title: "OK", style: .default))
+              self.present(alert, animated: true)
+          }
+        }
+      }
+    } else {
+      viewModel.createFood(
+        name: name,
+        description: description,
+        categoryId: categoryId,
+        calories: calories,
+        tags: selectedTagIDs,
+        images: selectedImages
+      ) { [weak self] result in
+        DispatchQueue.main.async { // Update UI on main thread
+          activityIndicator.stopAnimating()
+          activityIndicator.removeFromSuperview()
+          guard let self = self else { return }
+          
+          switch result {
+            case .success(let response):
+              print("Food created successfully: \(response)")
+              let alert = UIAlertController(title: "Success", message: "Food added successfully!", preferredStyle: .alert)
+              alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                self.nameField.textField.text = ""
+                self.descriptionView.textView.text = ""
+                self.categoryView.category = nil
+                self.caloriesView.textField.text = ""
+                self.tags = []
+                self.selectedTagIDs = []
+                self.selectedTagNames = []
+                self.tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+                self.selectedImages = []
+                self.imagesCollectionView.reloadData()
+              })
+              self.present(alert, animated: true)
+              
+            case .failure(let error):
+              let alert = UIAlertController(title: "Error", message: "Failed to add food: \(error.localizedDescription)", preferredStyle: .alert)
+              alert.addAction(UIAlertAction(title: "OK", style: .default))
+              self.present(alert, animated: true)
+          }
+        }
+      }
+    }
   }
   
   // MARK: - Tag Management
@@ -315,6 +468,16 @@ class AddViewController: UIViewController {
     guard !tag.isEmpty, !tags.contains(tag) else { return }
     
     tags.append(tag)
+    selectedTagNames.append(tag)
+    
+    
+    if let tagID = tagsDictionary[tag] {
+      selectedTagIDs.append(tagID)
+    } else {
+      let alert = UIAlertController(title: "Invalid Tag", message: "Please enter a valid tag.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+    }
     
     let tagView = TagRemoveView(text: tag) { [weak self] in
       self?.removeTag(tag)
@@ -328,6 +491,13 @@ class AddViewController: UIViewController {
     if let index = tags.firstIndex(of: tag) {
       tags.remove(at: index)
       tagsStackView.arrangedSubviews[index].removeFromSuperview()
+      
+      if let idIndex = selectedTagNames.firstIndex(of: tag), let tagID = tagsDictionary[tag] {
+        selectedTagNames.remove(at: idIndex)
+        if let idToRemoveIndex = selectedTagIDs.firstIndex(of: tagID){
+          selectedTagIDs.remove(at: idToRemoveIndex)
+        }
+      }
     }
   }
 }
@@ -391,5 +561,11 @@ extension AddViewController: UITextFieldDelegate {
     }
     textField.resignFirstResponder()
     return true
+  }
+}
+
+extension AddViewController: CategoryPickerViewDelegate {
+  func categoryPickerView(_ pickerView: CategoryPickerView, didSelect category: Category?) {
+    print("Selected category: \(category?.name ?? "None") (ID: \(category?.id ?? -1))")
   }
 }

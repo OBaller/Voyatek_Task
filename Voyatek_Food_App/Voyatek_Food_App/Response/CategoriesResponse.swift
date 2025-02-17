@@ -26,3 +26,5 @@ struct CategoriesResponse: Codable {
     let message: String
     let data: [Category]
 }
+
+

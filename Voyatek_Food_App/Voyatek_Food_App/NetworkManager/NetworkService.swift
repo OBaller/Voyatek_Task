@@ -42,6 +42,19 @@ class NetworkManager {
     }
   }
   
+  func getTags(completion: @escaping (Result<TagsResponse, Error>) -> Void) {
+    let urlString = "https://assessment.vgtechdemo.com/api/tags"
+    
+    fetchGenericJSON(head: .header, token: nil, header: "Authorization", urlString: urlString, method: "GET", body: nil, queryItems: nil) { (result: Result<TagsResponse, Error>) in
+      switch result {
+        case .success(let response):
+//          print(response)
+          completion(.success(response))
+        case .failure(let error):
+          completion(.failure(error))
+      }
+    }
+  }
   
   
   // MARK: - Generic function to make network requests
