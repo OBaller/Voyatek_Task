@@ -113,6 +113,7 @@ class HomeViewController: UIViewController {
     super.viewWillAppear(animated)
     navigationController?.navigationBar.prefersLargeTitles = false
     navigationController?.navigationBar.tintColor = .label
+    foodViewModel.fetchFood()
   }
   
   

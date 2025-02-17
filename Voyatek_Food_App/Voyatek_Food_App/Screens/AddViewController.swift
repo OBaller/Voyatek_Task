@@ -185,11 +185,33 @@ class AddViewController: UIViewController {
     
     loadImagesFromURLs(food.foodImages.map { $0.imageURL })
     
-    food.foodTags.forEach { addTag($0) }
+    food.foodTags.forEach { tagName in
+      addTagForEditing(tagName)
+    }
     addFoodButton.setTitle("Update Food", for: .normal)
     addFoodButton.isEnabled = true
     addFoodButton.setTitleColor(.white, for: .normal)
     addFoodButton.backgroundColor = .systemBlue
+  }
+  
+  private func addTagForEditing(_ tag: String) {
+    tags.append(tag) // Display the tag as-is
+    
+    let tagView = TagRemoveView(text: tag) { [weak self] in
+      self?.removeTag(tag)
+    }
+    tagsStackView.addArrangedSubview(tagView)
+    
+    if let tagID = tagsDictionary[tag] {
+      selectedTagNames.append(tag)
+      selectedTagIDs.append(tagID)
+    } else {
+      //      selectedTagNames.append(tag)
+      //      let tempID = -abs(tag.hashValue)
+      //      selectedTagIDs.append(tempID)
+      
+      //      print("Warning: Tag '\(tag)' not found in tagsDictionary. Using temporary ID: \(tempID)")
+    }
   }
   
   
@@ -388,11 +410,10 @@ class AddViewController: UIViewController {
     
     let foodId = foodItem?.id
     
-    // *** Show Activity Indicator ***
     let activityIndicator = UIActivityIndicatorView(style: .medium)
-    activityIndicator.center = self.view.center // Or wherever you want to center it
+    activityIndicator.center = self.view.center
     activityIndicator.startAnimating()
-    self.view.addSubview(activityIndicator) // Add it to the view
+    self.view.addSubview(activityIndicator)
     
     if isEditing, let foodId = foodId {
       viewModel.updateFood(
@@ -404,16 +425,20 @@ class AddViewController: UIViewController {
         tags: selectedTagIDs,
         images: selectedImages
       ) { [weak self] result in
-        DispatchQueue.main.async { // Update UI on main thread
-          activityIndicator.stopAnimating() // Stop and remove indicator
+        DispatchQueue.main.async {
+          activityIndicator.stopAnimating()
           activityIndicator.removeFromSuperview()
           guard let self = self else { return }
           
           switch result {
             case .success(let response):
               print("Food updated successfully: \(response)")
-              self.navigationController?.popViewController(animated: true) // If you still want to pop on update
               
+              let alert = UIAlertController(title: "Success", message: "Food updated successfully!", preferredStyle: .alert)
+              alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                self.navigationController?.popToRootViewController(animated: true) // Pop to root
+              })
+              self.present(alert, animated: true)
             case .failure(let error):
               let alert = UIAlertController(title: "Error", message: "Failed to update food: \(error.localizedDescription)", preferredStyle: .alert)
               alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -430,7 +455,7 @@ class AddViewController: UIViewController {
         tags: selectedTagIDs,
         images: selectedImages
       ) { [weak self] result in
-        DispatchQueue.main.async { // Update UI on main thread
+        DispatchQueue.main.async {
           activityIndicator.stopAnimating()
           activityIndicator.removeFromSuperview()
           guard let self = self else { return }
