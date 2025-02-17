@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C51B4D222D622636002CCA87 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C51B4D212D622636002CCA87 /* Alamofire */; };
 		C51B4D392D625FBB002CCA87 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C51B4D382D625FBB002CCA87 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +70,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C51B4D392D625FBB002CCA87 /* SDWebImage in Frameworks */,
-				C51B4D222D622636002CCA87 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +130,6 @@
 			);
 			name = Voyatek_Food_App;
 			packageProductDependencies = (
-				C51B4D212D622636002CCA87 /* Alamofire */,
 				C51B4D382D625FBB002CCA87 /* SDWebImage */,
 			);
 			productName = Voyatek_Food_App;
@@ -218,7 +215,6 @@
 			mainGroup = C57751D02D5F4CF500FDE1BA;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				C51B4D202D622636002CCA87 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				C51B4D372D625FBB002CCA87 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -584,14 +580,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C51B4D202D622636002CCA87 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.10.2;
-			};
-		};
 		C51B4D372D625FBB002CCA87 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -603,11 +591,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C51B4D212D622636002CCA87 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C51B4D202D622636002CCA87 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		C51B4D382D625FBB002CCA87 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C51B4D372D625FBB002CCA87 /* XCRemoteSwiftPackageReference "SDWebImage" */;
